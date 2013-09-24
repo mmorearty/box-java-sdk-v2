@@ -1,9 +1,13 @@
 package com.box.boxjavalibv2.requests.requestobjects;
 
+import java.util.Date;
+
 import com.box.boxjavalibv2.dao.BoxFile;
 import com.box.boxjavalibv2.dao.BoxFolder;
 import com.box.boxjavalibv2.dao.BoxItem;
 import com.box.boxjavalibv2.jsonentities.MapJSONStringEntity;
+
+import org.apache.commons.lang.time.DateFormatUtils;
 
 public class BoxItemRequestObject extends BoxDefaultRequestObject {
 
@@ -76,6 +80,56 @@ public class BoxItemRequestObject extends BoxDefaultRequestObject {
      */
     public BoxItemRequestObject setDescription(String description) {
         put(BoxFile.FIELD_DESCRIPTION, description);
+        return this;
+    }
+
+    /**
+     * Set the time the item was last modified
+     * 
+     * @param date
+     *            date
+     * @return
+     */
+    public BoxItemRequestObject setContentModifiedAt(String date) {
+        put(BoxItem.FIELD_CONTENT_MODIFIED_AT, date);
+        return this;
+    }
+
+    /**
+     * Set the time the item was last modified
+     * 
+     * @param date
+     *            date
+     * @return
+     */
+    public BoxItemRequestObject setContentModifiedAt(Date date) {
+        String isoDate = DateFormatUtils.ISO_DATETIME_TIME_ZONE_FORMAT.format(date);
+        put(BoxItem.FIELD_CONTENT_MODIFIED_AT, isoDate);
+        return this;
+    }
+
+    /**
+     * Set the time the item was created
+     * 
+     * @param date
+     *            date
+     * @return
+     */
+    public BoxItemRequestObject setContentCreatedAt(String date) {
+        put(BoxItem.FIELD_CONTENT_CREATED_AT, date);
+        return this;
+    }
+
+    /**
+     * Set the time the item was created
+     * 
+     * @param date
+     *            date
+     * @return
+     */
+    public BoxItemRequestObject setContentCreatedAt(Date date) {
+        String isoDate = DateFormatUtils.ISO_DATETIME_TIME_ZONE_FORMAT.format(date);
+        put(BoxItem.FIELD_CONTENT_CREATED_AT, isoDate);
         return this;
     }
 }
