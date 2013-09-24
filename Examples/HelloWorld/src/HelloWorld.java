@@ -12,15 +12,15 @@ import java.util.ArrayList;
 public class HelloWorld {
 
     public static final int PORT = 4000;
-    public static final String key = "YOUR API KEY HERE";
-    public static final String secret = "YOUR OAUTH2 SECRET HERE";
+    public static final String key = "xlsgvmnjqap64k7is2dktpt56d0ok5gi";
+    public static final String secret = "DDAJqvTnAmRXiy2DH01UgZmg5q22pbqL";
 
-    public static void main(String[] args) throws AuthFatalFailureException, BoxServerException, BoxRestException {
+    public static void main(String[] args) throws AuthFatalFailureException, BoxServerException, BoxRestException, InterruptedException {
 
         if (key.equals("YOUR API KEY HERE")) {
             System.out.println("Before this sample app will work, you will need to change the");
             System.out.println("'key' and 'secret' values in the source code.");
-			return;
+            return;
         }
 
         String code = "";
@@ -32,15 +32,36 @@ public class HelloWorld {
             e.printStackTrace();
         }
 
-        BoxClient client = getAuthenticatedClient(code);
+        try {
+            BoxClient client = getAuthenticatedClient(code);
 
-        BoxFolder boxFolder= client.getFoldersManager().getFolder("0",null);
-        ArrayList<BoxTypedObject> folderEntries = boxFolder.getItemCollection().getEntries();
-        int folderSize = folderEntries.size();
-        for (int i = 0; i <= folderSize-1; i++){
-            BoxTypedObject folderEntry = folderEntries.get(i);
-            String name = (folderEntry instanceof BoxItem) ? ((BoxItem)folderEntry).getName() : "(unknown)";
-            System.out.println("i:" + i + ", Type:" + folderEntry.getType() + ", Id:" + folderEntry.getId() + ", Name:" + name);
+            // delete the "test.txt" file if it already exists
+            for (BoxTypedObject item: client.getFoldersManager().getFolderItems("0", null).getEntries()) {
+                if (((BoxItem)item).getName().equals("test.txt")) {
+                    client.getFilesManager().deleteFile(item.getId(), null);
+                    break;
+                }
+            }
+
+            for (int i=0; i<25; i++) {
+                System.out.println((i+1) + ":");
+
+                // upload file "test.txt"
+                System.out.println("  upload");
+                BoxFileUploadRequestObject uploadReq = BoxFileUploadRequestObject.uploadFileRequestObject("0", "test.txt", new File("/etc/shells"));
+                BoxFile bFile = client.getFilesManager().uploadFile(uploadReq);
+
+                // download file "test.txt"
+                System.out.println("  download");
+                InputStream fileToDownload = client.getFilesManager().downloadFile(bFile.getId(), null);
+                fileToDownload.close();
+
+                // delete file "test.txt"
+                System.out.print("  delete");
+                client.getFilesManager().deleteFile(bFile.getId(), null);
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
         }
     }
 
