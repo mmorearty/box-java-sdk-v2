@@ -104,4 +104,7 @@ public interface IBoxRequest {
 
     /** Get expected response code. */
     int getExpectedResponseCode();
+
+    /** Whether this request can safely be reissued after token expiration. */
+    boolean isRepeatable();
 }

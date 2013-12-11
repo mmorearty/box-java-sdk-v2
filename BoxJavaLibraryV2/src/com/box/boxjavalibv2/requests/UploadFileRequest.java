@@ -61,4 +61,11 @@ public class UploadFileRequest extends DefaultBoxRequest {
     public String getApiUrlPath() {
         return getConfig().getUploadUrlPath();
     }
+
+    @Override
+    public boolean isRepeatable() {
+        // Some upload requests are not repeatable, because they read
+        // the file to be uploaded from an InputStream.
+        return false;
+    }
 }

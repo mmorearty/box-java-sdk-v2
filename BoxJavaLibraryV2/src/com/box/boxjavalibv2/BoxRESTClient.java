@@ -2,6 +2,7 @@ package com.box.boxjavalibv2;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -33,6 +34,7 @@ public class BoxRESTClient extends BoxBasicRestClient {
     public final static String OAUTH_ERROR_HEADER = "error";
     public final static String OAUTH_INVALID_TOKEN = "invalid_token";
     public final static String WWW_AUTHENTICATE = "WWW-Authenticate";
+    private final static int PRECAUTIONARY_REFRESH_SECONDS = 30;
     private final List<IBoxRestVisitor> visitors = new ArrayList<IBoxRestVisitor>();
 
     private boolean keepConnectionOpen = true;
@@ -71,6 +73,21 @@ public class BoxRESTClient extends BoxBasicRestClient {
      * @throws AuthFatalFailureException
      */
     private IBoxResponse execute(final IBoxRequest boxRequest, final boolean usingOAuth) throws BoxRestException, AuthFatalFailureException {
+        // If the access token is going to expire very soon, and the request
+        // we are making is not repeatable, then refresh our access token now.
+        if (usingOAuth && !boxRequest.isRepeatable()) {
+            OAuthAuthorization auth = (OAuthAuthorization) boxRequest.getAuth();
+            Date soon = new Date(new Date().getTime() + PRECAUTIONARY_REFRESH_SECONDS);
+            if (auth.getExpiresAt().before(soon)) {
+                try {
+                    return handleOAuthTokenExpire(auth, boxRequest);
+                }
+                catch (BoxUnexpectedHttpStatusException e) {
+                    handleException(e, sequenceId);
+                }
+            }
+        }
+
         HttpUriRequest httpRequest = boxRequest.prepareRequest();
         HttpResponse response = null;
 

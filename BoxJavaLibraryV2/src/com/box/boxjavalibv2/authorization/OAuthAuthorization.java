@@ -1,5 +1,7 @@
 package com.box.boxjavalibv2.authorization;
 
+import java.util.Date;
+
 import com.box.boxjavalibv2.dao.BoxOAuthToken;
 import com.box.boxjavalibv2.exceptions.AuthFatalFailureException;
 import com.box.restclientv2.authorization.DefaultRequestAuth;
@@ -55,6 +57,10 @@ public class OAuthAuthorization extends DefaultRequestAuth {
         super.setAuth(request);
 
         request.addHeader(AUTH_HEADER_NAME, getAuthString());
+    }
+
+    public Date getExpiresAt() {
+        return mOAuth.getAuthData().getExpiresAt();
     }
 
     /**

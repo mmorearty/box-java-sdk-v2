@@ -1,5 +1,6 @@
 package com.box.boxjavalibv2.dao;
 
+import java.util.Date;
 import java.util.Map;
 
 import com.box.boxjavalibv2.interfaces.IAuthData;
@@ -16,6 +17,7 @@ public class BoxOAuthToken extends BoxObject implements IAuthData {
     public static final String FIELD_EXPIRES_IN = "expires_in";
     public static final String FIELD_TOKEN_TYPE = "token_type";
     public static final String FIELD_REFRESH_TOKEN = "refresh_token";
+    private static Date expiresAt;
 
     public BoxOAuthToken() {
     }
@@ -70,6 +72,14 @@ public class BoxOAuthToken extends BoxObject implements IAuthData {
     @JsonProperty(FIELD_EXPIRES_IN)
     private void setExpiresIn(final Integer expiresIn) {
         put(FIELD_EXPIRES_IN, expiresIn);
+        expiresAt = new Date(new Date().getTime() + expiresIn);
+    }
+
+    /**
+     * @return the time at which the access token expires
+     */
+    public Date getExpiresAt() {
+        return expiresAt;
     }
 
     /**

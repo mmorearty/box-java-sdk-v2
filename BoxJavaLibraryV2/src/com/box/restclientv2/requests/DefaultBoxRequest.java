@@ -290,6 +290,11 @@ public class DefaultBoxRequest implements IBoxRequest {
         return mConfig.getApiUrlPath();
     }
 
+    @Override
+    public boolean isRepeatable() {
+        return true;
+    }
+
     /**
      * Construct raw request. Currently only support GET/PUT/POST/DELETE.
      * 
