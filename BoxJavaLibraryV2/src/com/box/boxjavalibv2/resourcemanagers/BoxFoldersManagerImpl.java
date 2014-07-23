@@ -29,7 +29,7 @@ import com.box.restclientv2.authorization.IBoxRequestAuth;
 import com.box.restclientv2.exceptions.BoxRestException;
 import com.box.restclientv2.requestsbase.BoxDefaultRequestObject;
 
-public class BoxFoldersManageImpl extends BoxItemsManagerImpl implements IBoxFoldersManager {
+public class BoxFoldersManagerImpl extends BoxItemsManagerImpl implements IBoxFoldersManager {
 
     /**
      * Constructor.
@@ -45,8 +45,8 @@ public class BoxFoldersManageImpl extends BoxItemsManagerImpl implements IBoxFol
      * @param restClient
      *            REST client to make api calls.
      */
-    public BoxFoldersManageImpl(IBoxConfig config, final IBoxResourceHub resourceHub, final IBoxJSONParser parser, final IBoxRequestAuth auth,
-        final IBoxRESTClient restClient) {
+    public BoxFoldersManagerImpl(IBoxConfig config, final IBoxResourceHub resourceHub, final IBoxJSONParser parser, final IBoxRequestAuth auth,
+                                 final IBoxRESTClient restClient) {
         super(config, resourceHub, parser, auth, restClient);
     }
 

@@ -3,6 +3,7 @@ package com.box.boxjavalibv2;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.box.boxjavalibv2.resourcemanagers.*;
 import org.apache.commons.lang.NotImplementedException;
 
 import com.box.boxjavalibv2.BoxConnectionManagerBuilder.BoxConnectionManager;
@@ -28,32 +29,7 @@ import com.box.boxjavalibv2.jsonparsing.BoxJSONParser;
 import com.box.boxjavalibv2.jsonparsing.BoxResourceHub;
 import com.box.boxjavalibv2.jsonparsing.IBoxJSONParser;
 import com.box.boxjavalibv2.jsonparsing.IBoxResourceHub;
-import com.box.boxjavalibv2.resourcemanagers.BoxCollaborationsManagerImpl;
-import com.box.boxjavalibv2.resourcemanagers.BoxCommentsManagerImpl;
-import com.box.boxjavalibv2.resourcemanagers.BoxEventsManagerImpl;
-import com.box.boxjavalibv2.resourcemanagers.BoxFilesManagerImpl;
-import com.box.boxjavalibv2.resourcemanagers.BoxFoldersManageImpl;
-import com.box.boxjavalibv2.resourcemanagers.BoxGroupsManagerImpl;
-import com.box.boxjavalibv2.resourcemanagers.BoxItemsManagerImpl;
-import com.box.boxjavalibv2.resourcemanagers.BoxOAuthManagerImpl;
-import com.box.boxjavalibv2.resourcemanagers.BoxSearchManagerImpl;
-import com.box.boxjavalibv2.resourcemanagers.BoxSharedItemsManagerImpl;
-import com.box.boxjavalibv2.resourcemanagers.BoxTrashManagerImpl;
-import com.box.boxjavalibv2.resourcemanagers.BoxUsersManagerImpl;
-import com.box.boxjavalibv2.resourcemanagers.IBoxCollaborationsManager;
-import com.box.boxjavalibv2.resourcemanagers.IBoxCommentsManager;
-import com.box.boxjavalibv2.resourcemanagers.IBoxEventsManager;
-import com.box.boxjavalibv2.resourcemanagers.IBoxFilesManager;
-import com.box.boxjavalibv2.resourcemanagers.IBoxFoldersManager;
-import com.box.boxjavalibv2.resourcemanagers.IBoxGroupsManager;
-import com.box.boxjavalibv2.resourcemanagers.IBoxItemsManager;
-import com.box.boxjavalibv2.resourcemanagers.IBoxOAuthManager;
-import com.box.boxjavalibv2.resourcemanagers.IBoxResourceManager;
-import com.box.boxjavalibv2.resourcemanagers.IBoxSearchManager;
-import com.box.boxjavalibv2.resourcemanagers.IBoxSharedItemsManager;
-import com.box.boxjavalibv2.resourcemanagers.IBoxTrashManager;
-import com.box.boxjavalibv2.resourcemanagers.IBoxUsersManager;
-import com.box.boxjavalibv2.resourcemanagers.IPluginResourceManagerBuilder;
+import com.box.boxjavalibv2.resourcemanagers.BoxFoldersManagerImpl;
 import com.box.restclientv2.IBoxRESTClient;
 import com.box.restclientv2.authorization.IBoxRequestAuth;
 
@@ -157,7 +133,7 @@ public class BoxClient extends BoxBase implements IAuthFlowListener {
 
         boxItemsManager = new BoxItemsManagerImpl(getConfig(), getResourceHub(), getJSONParser(), getAuth(), getRestClient());
         filesManager = new BoxFilesManagerImpl(getConfig(), getResourceHub(), getJSONParser(), getAuth(), getRestClient());
-        foldersManager = new BoxFoldersManageImpl(getConfig(), getResourceHub(), getJSONParser(), getAuth(), getRestClient());
+        foldersManager = new BoxFoldersManagerImpl(getConfig(), getResourceHub(), getJSONParser(), getAuth(), getRestClient());
         searchManager = new BoxSearchManagerImpl(getConfig(), getResourceHub(), getJSONParser(), getAuth(), getRestClient());
         eventsManager = new BoxEventsManagerImpl(getConfig(), getResourceHub(), getJSONParser(), getAuth(), getRestClient());
         collaborationsManager = new BoxCollaborationsManagerImpl(getConfig(), getResourceHub(), getJSONParser(), getAuth(), getRestClient());
@@ -371,7 +347,7 @@ public class BoxClient extends BoxBase implements IAuthFlowListener {
      * @return BoxFoldersManager
      */
     public IBoxFoldersManager getSharedFoldersManager(String sharedLink, String password) {
-        return new BoxFoldersManageImpl(getConfig(), getResourceHub(), getJSONParser(), getSharedItemAuth(sharedLink, password), getRestClient());
+        return new BoxFoldersManagerImpl(getConfig(), getResourceHub(), getJSONParser(), getSharedItemAuth(sharedLink, password), getRestClient());
     }
 
     /**

@@ -2,38 +2,39 @@ package com.box.boxjavalibv2;
 
 public class BoxConfigBuilder {
 
-    private final static String VERSION_NUMBER = "v3.0.14";
+    /** Box Java SDK version. */
+    public static final String VERSION_NUMBER = "v3.0.14";
     /** Default API url scheme. */
-    private static final String API_URL_SCHEME = "https";
+    public static final String API_URL_SCHEME = "https";
     /** Default API url authority. */
-    private static final String API_URL_AUTHORITY = "api.box.com";
+    public static final String API_URL_AUTHORITY = "api.box.com";
     /** Default API url path. */
-    private static final String API_URL_PATH = "/2.0";
+    public static final String API_URL_PATH = "/2.0";
 
     /** Default Upload url scheme. */
-    private static final String UPLOAD_URL_SCHEME = "https";
+    public static final String UPLOAD_URL_SCHEME = "https";
     /** Default Upload url authority. */
-    private static final String UPLOAD_URL_AUTHORITY = "upload.box.com";
+    public static final String UPLOAD_URL_AUTHORITY = "upload.box.com";
     /** Default upload API url path. */
-    private static final String UPLOAD_URL_PATH = "/api/2.0";
+    public static final String UPLOAD_URL_PATH = "/api/2.0";
 
     /** Default OAuth url scheme. */
-    private static final String OAUTH_URL_SCHEME = "https";
+    public static final String OAUTH_URL_SCHEME = "https";
     /** Default OAuth url authority. */
-    private static final String OAUTH_URL_AUTHORITY = "www.box.com";
+    public static final String OAUTH_URL_AUTHORITY = "www.box.com";
     /** Default OAuth API url path. */
-    private static final String OAUTH_API_URL_PATH = "/api";
+    public static final String OAUTH_API_URL_PATH = "/api";
     /** Default OAuth url path. */
-    private static final String OAUTH_WEB_URL_PATH = "/api/oauth2/authorize";
+    public static final String OAUTH_WEB_URL_PATH = "/api/oauth2/authorize";
 
     /** Default Download url scheme. */
-    private static final String DOWNLOAD_URL_SCHEME = "https";
+    public static final String DOWNLOAD_URL_SCHEME = "https";
     /** Default Download url authority. */
-    private static final String DOWNLOAD_URL_AUTHORITY = "api.box.com";
+    public static final String DOWNLOAD_URL_AUTHORITY = "api.box.com";
     /** Default Download url authority. */
-    private static final String DOWNLOAD_URL_PATH = "/2.0";
+    public static final String DOWNLOAD_URL_PATH = "/2.0";
     /** Default User-Agent String. */
-    private static final String USER_AGENT = "BoxJavaLibraryV2";
+    public static final String USER_AGENT = "BoxJavaLibraryV2";
 
     private String mOAuthUrlScheme = OAUTH_URL_SCHEME;
     private String mOAuthUrlAuthority = OAUTH_URL_AUTHORITY;

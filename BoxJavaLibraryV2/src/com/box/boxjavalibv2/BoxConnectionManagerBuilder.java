@@ -46,7 +46,7 @@ public class BoxConnectionManagerBuilder {
 
     /**
      * @param timePeriodCleanUpIdleConnection
-     *            clean up idle connection every such period of time. in miliseconds.
+     *            clean up idle connection every such period of time. in milliseconds.
      */
     public void setTimePeriodCleanUpIdleConnection(long timePeriodCleanUpIdleConnection) {
         this.timePeriodCleanUpIdleConnection = timePeriodCleanUpIdleConnection;
@@ -54,7 +54,7 @@ public class BoxConnectionManagerBuilder {
 
     /**
      * @param idleTimeThreshold
-     *            an idle connection will be closed if idled above this threshold of time. in miliseconds.
+     *            an idle connection will be closed if idled above this threshold of time. in milliseconds.
      */
     public void setIdleTimeThreshold(long idleTimeThreshold) {
         this.idleTimeThreshold = idleTimeThreshold;
@@ -119,7 +119,7 @@ public class BoxConnectionManagerBuilder {
                                 wait(timePeriodCleanUpIdleConnection);
                                 // Close expired connections
                                 connMan.closeExpiredConnections();
-                                connMan.closeIdleConnections(idleTimeThreshold, TimeUnit.SECONDS);
+                                connMan.closeIdleConnections(idleTimeThreshold, TimeUnit.MILLISECONDS);
                             }
                         }
                     }

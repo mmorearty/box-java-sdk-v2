@@ -32,6 +32,9 @@ public interface IBoxConfig {
      */
     public String getUploadUrlAuthority();
 
+    /** Get the upload url path. */
+    public String getUploadUrlPath();
+
     /**
      * Get the Download URL scheme.
      * 
@@ -46,12 +49,8 @@ public interface IBoxConfig {
      */
     public String getDownloadUrlAuthority();
 
-    /**
-     * Get the User-Agent String to apply to the HTTP(S) calls.
-     * 
-     * @return String to use for User-Agent.
-     */
-    public String getUserAgent();
+    /** Get the download url path */
+    String getDownloadUrlPath();
 
     /**
      * @return the OAuthUrlScheme
@@ -73,11 +72,12 @@ public interface IBoxConfig {
      */
     public String getOAuthApiUrlPath();
 
-    /** Get the upload url path. */
-    public String getUploadUrlPath();
-
-    /** Get the download url path */
-    String getDownloadUrlPath();
+    /**
+     * Get the User-Agent String to apply to the HTTP(S) calls.
+     *
+     * @return String to use for User-Agent.
+     */
+    public String getUserAgent();
 
     String getVersion();
 }

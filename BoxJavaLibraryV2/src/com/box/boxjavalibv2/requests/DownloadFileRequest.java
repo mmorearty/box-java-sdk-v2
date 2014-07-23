@@ -56,4 +56,9 @@ public class DownloadFileRequest extends DefaultBoxRequest {
     public String getAuthority() {
         return getConfig().getDownloadUrlAuthority();
     }
+
+    @Override
+    public String getUriPath() {
+        return getConfig().getDownloadUrlPath();
+    }
 }
